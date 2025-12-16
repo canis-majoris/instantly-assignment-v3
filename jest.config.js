@@ -1,8 +1,5 @@
 module.exports = {
-  projects: [
-    '<rootDir>/jest.node.config.js',
-    '<rootDir>/jest.react.config.js',
-  ],
+  projects: ['<rootDir>/jest.node.config.js', '<rootDir>/jest.react.config.js'],
   reporters: [
     'default',
     [

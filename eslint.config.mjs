@@ -23,13 +23,14 @@ const eslintConfig = [
   // Use single quotes instead of double quotes
   {
     rules: {
-      'quotes': [ 'error', 'single', { 'avoidEscape': true } ],
-      'semi': [ 'error', 'always' ],
-      'comma-dangle': [ 'error', 'always-multiline' ],
+      'quotes': ['error', 'single', { 'avoidEscape': true }],
+      'semi': ['error', 'always'],
+      'comma-dangle': ['error', 'always-multiline'],
       'no-trailing-spaces': 'error',
-      'eol-last': [ 'error', 'always' ],
-      'indent': [ 'error', 2 ],
-      'object-curly-spacing': [ 'error', 'always' ],
+      'eol-last': ['error', 'always'],
+      // indent rule disabled due to ESLint bug with JSX - Prettier handles it instead
+      'indent': 'off',
+      'object-curly-spacing': ['error', 'always'],
     },
   },
 ];

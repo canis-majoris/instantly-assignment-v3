@@ -1,82 +1,49 @@
+/**
+ * Email Card Component
+ * Displays a compact preview of an email in the email list
+ */
+
 import React from 'react';
-import {
-  Card,
-  CardContent,
-  Typography,
-  Box,
-  Chip,
-  Avatar,
-  Divider,
-  IconButton,
-} from '@mui/material';
-import {
-  Star,
-  StarBorder,
-  MarkEmailRead,
-  MarkEmailUnread,
-} from '@mui/icons-material';
+import { Card, CardContent, Typography, Box } from '@mui/material';
+import { Star } from '@mui/icons-material';
+import { Email } from '@/types';
+import { EmailAvatar } from './EmailAvatar';
+import { StatusChips } from './StatusChips';
+import { formatCompactDate, truncateText } from '@/lib/utils';
 
-interface EmailProps {
-  id: number;
-  threadId: string;
-  subject: string;
-  from: string;
-  to: string;
-  content: string | null;
-  isRead: boolean;
-  isImportant: boolean;
-  createdAt: Date;
-  updatedAt: Date;
-};
+interface EmailCardProps {
+  email: Email;
+  isSelected?: boolean;
+  onClick?: () => void;
+}
 
-const EmailCard: React.FC<{ email: EmailProps }> = ({ email }) => {
-  const getInitials = (name: string) => {
-    return name.split('@')[0].substring(0, 2).toUpperCase();
-  };
-
-  const formatDate = (date: Date) => {
-    const now = new Date();
-    const emailDate = new Date(date);
-    const diffInHours = (now.getTime() - emailDate.getTime()) / (1000 * 60 * 60);
-
-    if (diffInHours < 24) {
-      return emailDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    } else {
-      return emailDate.toLocaleDateString();
-    }
-  };
-
+const EmailCard: React.FC<EmailCardProps> = ({ email, isSelected = false, onClick }) => {
   return (
     <Card
       data-testid={`email-card-${email.id}`}
+      onClick={onClick}
       sx={{
         borderRadius: 1,
-        boxShadow: email.isRead ? 0 : 1,
-        border: email.isRead ? '1px solid' : '2px solid',
-        borderColor: email.isRead ? 'divider' : 'primary.main',
-        backgroundColor: email.isRead ? 'background.paper' : 'action.hover',
-        transition: 'all 0.2s ease-in-out',
+        boxShadow: isSelected ? 2 : email.isRead ? 0 : 1,
+        border: '2px solid',
+        borderColor: isSelected ? 'primary.main' : email.isRead ? 'divider' : 'primary.light',
+        backgroundColor: isSelected
+          ? 'action.selected'
+          : email.isRead
+            ? 'background.paper'
+            : 'action.hover',
+        transition: 'all 0.15s ease-in-out',
         cursor: 'pointer',
         '&:hover': {
+          backgroundColor: isSelected ? 'action.selected' : 'action.hover',
           boxShadow: 2,
-          backgroundColor: 'action.hover',
         },
       }}
     >
       <CardContent sx={{ p: 1.5, '&:last-child': { pb: 1.5 } }}>
-        {/* Compact Header */}
+        {/* Header */}
         <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 1.5, mb: 1 }}>
-          <Avatar
-            sx={{
-              bgcolor: email.isImportant ? 'warning.main' : 'primary.main',
-              width: 32,
-              height: 32,
-              fontSize: '0.75rem',
-              fontWeight: 600,
-            }}
-          >
-            {getInitials(email.from)}
-          </Avatar>
+          <EmailAvatar email={email} size="small" />
 
           <Box sx={{ flex: 1, minWidth: 0 }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, mb: 0.5 }}>
@@ -94,9 +61,7 @@ const EmailCard: React.FC<{ email: EmailProps }> = ({ email }) => {
               >
                 {email.subject}
               </Typography>
-              {email.isImportant && (
-                <Star sx={{ color: 'warning.main', fontSize: '1rem' }} />
-              )}
+              {email.isImportant && <Star sx={{ color: 'warning.main', fontSize: '1rem' }} />}
             </Box>
 
             <Typography
@@ -115,25 +80,22 @@ const EmailCard: React.FC<{ email: EmailProps }> = ({ email }) => {
 
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
             <Typography variant="caption" color="text.secondary" sx={{ fontSize: '0.75rem' }}>
-              {formatDate(email.createdAt)}
+              {formatCompactDate(email.createdAt)}
             </Typography>
-            <Box sx={{ display: 'flex', gap: 0.25 }}>
-              {email.isImportant && (
-                <Star sx={{ color: 'warning.main', fontSize: '1rem' }} />
-              )}
-              {!email.isRead && (
-                <Box sx={{
+            {!email.isRead && (
+              <Box
+                sx={{
                   width: 8,
                   height: 8,
                   borderRadius: '50%',
                   bgcolor: 'primary.main',
-                }} />
-              )}
-            </Box>
+                }}
+              />
+            )}
           </Box>
         </Box>
 
-        {/* Compact Content Preview */}
+        {/* Content Preview */}
         <Typography
           variant="body2"
           sx={{
@@ -147,33 +109,12 @@ const EmailCard: React.FC<{ email: EmailProps }> = ({ email }) => {
             mb: 1,
           }}
         >
-          {
-            email.content ?
-              email.content.substring(0, 30) + '...' :
-              'Empty content'
-          }
+          {truncateText(email.content)}
         </Typography>
 
-        {/* Compact Status */}
-        <Box sx={{ display: 'flex', gap: 0.5, justifyContent: 'flex-end' }}>
-          {!email.isRead && (
-            <Chip
-              label="Unread"
-              size="small"
-              color="warning"
-              variant="outlined"
-              sx={{ fontSize: '0.65rem', height: 20 }}
-            />
-          )}
-          {email.isImportant && (
-            <Chip
-              label="Important"
-              size="small"
-              color="secondary"
-              variant="outlined"
-              sx={{ fontSize: '0.65rem', height: 20 }}
-            />
-          )}
+        {/* Status Chips */}
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <StatusChips email={email} />
         </Box>
       </CardContent>
     </Card>

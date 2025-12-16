@@ -1,5 +1,6 @@
 import { db } from '@/lib/database';
 import { Email, EmailDirection, emails } from '@/lib/schema';
+import { statsService } from '@/lib/statsService';
 
 // Create sample emails organized into threads
 export const emailData: Email[] = [
@@ -10,9 +11,11 @@ export const emailData: Email[] = [
     subject: 'New Project Proposal',
     from: 'sarah.johnson@company.com',
     to: 'team@company.com',
-    content: 'Hi team, I\'d like to propose a new project for Q1. Let me know your thoughts on the attached proposal.',
+    content:
+      "Hi team, I'd like to propose a new project for Q1. Let me know your thoughts on the attached proposal.",
     isRead: false,
     isImportant: true,
+    isDeleted: false,
     direction: EmailDirection.INCOMING,
     createdAt: new Date('2025-01-01'),
     updatedAt: new Date('2025-01-01'),
@@ -23,9 +26,11 @@ export const emailData: Email[] = [
     subject: 'Re: New Project Proposal',
     from: 'mike.chen@company.com',
     to: 'team@company.com',
-    content: 'Great idea Sarah! I think this aligns well with our current goals. I have some suggestions for the timeline.',
+    content:
+      'Great idea Sarah! I think this aligns well with our current goals. I have some suggestions for the timeline.',
     isRead: true,
     isImportant: false,
+    isDeleted: false,
     direction: EmailDirection.INCOMING,
     createdAt: new Date('2025-01-02'),
     updatedAt: new Date('2025-01-02'),
@@ -36,9 +41,11 @@ export const emailData: Email[] = [
     subject: 'Re: New Project Proposal',
     from: 'lisa.wang@company.com',
     to: 'team@company.com',
-    content: 'I agree with Mike. The proposal looks solid. When can we schedule a meeting to discuss the details?',
+    content:
+      'I agree with Mike. The proposal looks solid. When can we schedule a meeting to discuss the details?',
     isRead: true,
     isImportant: false,
+    isDeleted: false,
     direction: EmailDirection.INCOMING,
     createdAt: new Date('2025-01-03'),
     updatedAt: new Date('2025-01-03'),
@@ -49,9 +56,11 @@ export const emailData: Email[] = [
     subject: 'Re: New Project Proposal',
     from: 'sarah.johnson@company.com',
     to: 'team@company.com',
-    content: 'Thanks for the feedback! How about we meet this Friday at 2 PM? I\'ll send out a calendar invite.',
+    content:
+      "Thanks for the feedback! How about we meet this Friday at 2 PM? I'll send out a calendar invite.",
     isRead: false,
     isImportant: true,
+    isDeleted: false,
     direction: EmailDirection.INCOMING,
     createdAt: new Date('2025-01-04'),
     updatedAt: new Date('2025-01-04'),
@@ -65,6 +74,7 @@ export const emailData: Email[] = [
     content: 'Friday works for me. Looking forward to the discussion!',
     isRead: true,
     isImportant: false,
+    isDeleted: false,
     direction: EmailDirection.INCOMING,
     createdAt: new Date('2025-01-05'),
     updatedAt: new Date('2025-01-05'),
@@ -77,9 +87,11 @@ export const emailData: Email[] = [
     subject: 'Website Redesign Update',
     from: 'client@acmecorp.com',
     to: 'design@company.com',
-    content: 'Hi team, we\'re really excited about the new design direction. When can we see the next iteration?',
+    content:
+      "Hi team, we're really excited about the new design direction. When can we see the next iteration?",
     isRead: false,
     isImportant: true,
+    isDeleted: false,
     direction: EmailDirection.INCOMING,
     createdAt: new Date('2025-01-06'),
     updatedAt: new Date('2025-01-06'),
@@ -90,9 +102,11 @@ export const emailData: Email[] = [
     subject: 'Re: Website Redesign Update',
     from: 'design@company.com',
     to: 'client@acmecorp.com',
-    content: 'Thanks for the feedback! We\'re working on the next version and should have something to show you by next Tuesday.',
+    content:
+      "Thanks for the feedback! We're working on the next version and should have something to show you by next Tuesday.",
     isRead: true,
     isImportant: false,
+    isDeleted: false,
     direction: EmailDirection.INCOMING,
     createdAt: new Date('2025-01-07'),
     updatedAt: new Date('2025-01-07'),
@@ -103,9 +117,11 @@ export const emailData: Email[] = [
     subject: 'Re: Website Redesign Update',
     from: 'client@acmecorp.com',
     to: 'design@company.com',
-    content: 'Perfect! Looking forward to seeing the progress. The color scheme you chose is exactly what we had in mind.',
+    content:
+      'Perfect! Looking forward to seeing the progress. The color scheme you chose is exactly what we had in mind.',
     isRead: false,
     isImportant: false,
+    isDeleted: false,
     direction: EmailDirection.INCOMING,
     createdAt: new Date('2025-01-08'),
     updatedAt: new Date('2025-01-08'),
@@ -116,9 +132,11 @@ export const emailData: Email[] = [
     subject: 'Re: Website Redesign Update',
     from: 'design@company.com',
     to: 'client@acmecorp.com',
-    content: 'Great to hear! We\'ll make sure to include the updated navigation structure in the next version.',
+    content:
+      "Great to hear! We'll make sure to include the updated navigation structure in the next version.",
     isRead: true,
     isImportant: false,
+    isDeleted: false,
     direction: EmailDirection.INCOMING,
     createdAt: new Date('2025-01-09'),
     updatedAt: new Date('2025-01-09'),
@@ -131,9 +149,11 @@ export const emailData: Email[] = [
     subject: 'Database Performance Issue',
     from: 'devops@company.com',
     to: 'engineering@company.com',
-    content: 'We\'re experiencing slow query performance on the user table. Anyone available to help investigate?',
+    content:
+      "We're experiencing slow query performance on the user table. Anyone available to help investigate?",
     isRead: false,
     isImportant: true,
+    isDeleted: false,
     direction: EmailDirection.INCOMING,
     createdAt: new Date('2025-01-10'),
     updatedAt: new Date('2025-01-10'),
@@ -144,9 +164,11 @@ export const emailData: Email[] = [
     subject: 'Re: Database Performance Issue',
     from: 'alex.rodriguez@company.com',
     to: 'engineering@company.com',
-    content: 'I can help with this. I suspect it might be related to the new indexing strategy. Let me check the query logs.',
+    content:
+      'I can help with this. I suspect it might be related to the new indexing strategy. Let me check the query logs.',
     isRead: true,
     isImportant: false,
+    isDeleted: false,
     direction: EmailDirection.INCOMING,
     createdAt: new Date('2025-01-11'),
     updatedAt: new Date('2025-01-11'),
@@ -157,9 +179,11 @@ export const emailData: Email[] = [
     subject: 'Re: Database Performance Issue',
     from: 'devops@company.com',
     to: 'engineering@company.com',
-    content: 'Thanks Alex! I\'ve sent you the access credentials. The issue seems to be most prominent during peak hours.',
+    content:
+      "Thanks Alex! I've sent you the access credentials. The issue seems to be most prominent during peak hours.",
     isRead: true,
     isImportant: false,
+    isDeleted: false,
     direction: EmailDirection.INCOMING,
     createdAt: new Date('2025-01-12'),
     updatedAt: new Date('2025-01-12'),
@@ -170,9 +194,11 @@ export const emailData: Email[] = [
     subject: 'Re: Database Performance Issue',
     from: 'alex.rodriguez@company.com',
     to: 'engineering@company.com',
-    content: 'Found the issue! There\'s a missing index on the created_at column. I\'ll implement the fix tonight.',
+    content:
+      "Found the issue! There's a missing index on the created_at column. I'll implement the fix tonight.",
     isRead: false,
     isImportant: true,
+    isDeleted: false,
     direction: EmailDirection.INCOMING,
     createdAt: new Date('2025-01-13'),
     updatedAt: new Date('2025-01-13'),
@@ -185,9 +211,11 @@ export const emailData: Email[] = [
     subject: 'Q1 Marketing Campaign Ideas',
     from: 'marketing@company.com',
     to: 'team@company.com',
-    content: 'Let\'s brainstorm some ideas for our Q1 campaign. I\'m thinking we focus on sustainability and innovation.',
+    content:
+      "Let's brainstorm some ideas for our Q1 campaign. I'm thinking we focus on sustainability and innovation.",
     isRead: false,
     isImportant: false,
+    isDeleted: false,
     direction: EmailDirection.INCOMING,
     createdAt: new Date('2025-01-14'),
     updatedAt: new Date('2025-01-14'),
@@ -198,9 +226,11 @@ export const emailData: Email[] = [
     subject: 'Re: Q1 Marketing Campaign Ideas',
     from: 'creative@company.com',
     to: 'team@company.com',
-    content: 'Love the sustainability angle! We could create some compelling visuals around our eco-friendly initiatives.',
+    content:
+      'Love the sustainability angle! We could create some compelling visuals around our eco-friendly initiatives.',
     isRead: true,
     isImportant: false,
+    isDeleted: false,
     direction: EmailDirection.INCOMING,
     createdAt: new Date('2025-01-15'),
     updatedAt: new Date('2025-01-15'),
@@ -211,9 +241,11 @@ export const emailData: Email[] = [
     subject: 'Re: Q1 Marketing Campaign Ideas',
     from: 'marketing@company.com',
     to: 'team@company.com',
-    content: 'Excellent! Let\'s schedule a creative session next week to develop the concepts further.',
+    content:
+      "Excellent! Let's schedule a creative session next week to develop the concepts further.",
     isRead: false,
     isImportant: false,
+    isDeleted: false,
     direction: EmailDirection.INCOMING,
     createdAt: new Date('2025-01-16'),
     updatedAt: new Date('2025-01-16'),
@@ -226,9 +258,11 @@ export const emailData: Email[] = [
     subject: 'Coffee Chat?',
     from: 'colleague@company.com',
     to: 'user@example.com',
-    content: 'Hey! Would you like to grab coffee sometime this week? I\'d love to catch up and discuss the new project.',
+    content:
+      "Hey! Would you like to grab coffee sometime this week? I'd love to catch up and discuss the new project.",
     isRead: false,
     isImportant: false,
+    isDeleted: false,
     direction: EmailDirection.INCOMING,
     createdAt: new Date('2025-01-17'),
     updatedAt: new Date('2025-01-17'),
@@ -239,9 +273,10 @@ export const emailData: Email[] = [
     subject: 'Re: Coffee Chat?',
     from: 'user@example.com',
     to: 'colleague@company.com',
-    content: 'Absolutely! How about Wednesday afternoon? I\'m free after 2 PM.',
+    content: "Absolutely! How about Wednesday afternoon? I'm free after 2 PM.",
     isRead: true,
     isImportant: false,
+    isDeleted: false,
     direction: EmailDirection.INCOMING,
     createdAt: new Date('2025-01-18'),
     updatedAt: new Date('2025-01-18'),
@@ -252,9 +287,10 @@ export const emailData: Email[] = [
     subject: 'Re: Coffee Chat?',
     from: 'colleague@company.com',
     to: 'user@example.com',
-    content: 'Wednesday works perfectly! Let\'s meet at the coffee shop on 3rd street at 2:30 PM.',
+    content: "Wednesday works perfectly! Let's meet at the coffee shop on 3rd street at 2:30 PM.",
     isRead: false,
     isImportant: false,
+    isDeleted: false,
     direction: EmailDirection.INCOMING,
     createdAt: new Date('2025-01-19'),
     updatedAt: new Date('2025-01-19'),
@@ -268,6 +304,7 @@ export const emailData: Email[] = [
     content: 'Perfect! See you there. Looking forward to it!',
     isRead: true,
     isImportant: false,
+    isDeleted: false,
     direction: EmailDirection.INCOMING,
     createdAt: new Date('2025-01-20'),
     updatedAt: new Date('2025-01-20'),
@@ -296,15 +333,19 @@ async function main() {
   }
 
   const insertedEmails = await Promise.all(
-    emailData.map(email => db.insert(emails).values(email).returning()),
+    emailData.map((email) => db.insert(emails).values(email).returning()),
   );
 
   console.log(`✅ Created ${insertedEmails.length} emails`);
+
+  // Initialize stats lookup table
+  await statsService.recalculateStats();
+  console.log('✅ Initialized stats lookup table');
+
   console.log('🎉 Database seeding completed successfully!');
 }
 
-main()
-  .catch((e) => {
-    console.error('❌ Error during seeding:', e);
-    process.exit(1);
-  });
+main().catch((e) => {
+  console.error('❌ Error during seeding:', e);
+  process.exit(1);
+});

@@ -6,6 +6,7 @@ const config = {
   testEnvironment: 'jsdom',
   setupFilesAfterEnv: ['<rootDir>/jest.react.setup.js'],
   testPathIgnorePatterns: ['/api/', '/app/api/'],
+  transformIgnorePatterns: ['/node_modules/(?!(nuqs)/)'],
   reporters: [
     'default',
     [
