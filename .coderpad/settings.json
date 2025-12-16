@@ -1,0 +1,13 @@
+{
+  "autograding": {
+    "reports": {
+      "JUNIT": [
+        "junit-reports/*.xml"
+      ]
+    },
+    "runCommand": "npm install && npm run db:init && npm test"
+  },
+  "files.exclude": [],
+  "workbench.defaultOpenFiles": [],
+  "vscodeExtensions.installedByDefault": []
+}

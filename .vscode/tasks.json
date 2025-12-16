@@ -1,0 +1,35 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Install",
+      "type": "shell",
+      "command": "npm install",
+      "runOptions": {
+        "runOn": "folderOpen"
+      }
+    },
+    {
+      "label": "Init DB, seed it and generate types",
+      "type": "shell",
+      "command": "npm run db:init",
+      "runOptions": {
+        "runOn": "folderOpen"
+      },
+      "dependsOn": "Install"
+    },
+    {
+      "label": "Start server",
+      "type": "shell",
+      "command": "npm run dev",
+      "isBackground": true,
+      "problemMatcher": [
+        "$tsc"
+      ],
+      "runOptions": {
+        "runOn": "folderOpen"
+      },
+      "dependsOn": "Init DB, seed it and generate types"
+    }
+  ]
+}

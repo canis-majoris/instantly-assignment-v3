@@ -1,0 +1,15 @@
+# Dependencies directory of Node.js
+/node_modules
+
+# next.js
+/.next/
+generated
+
+# typescript
+next-env.d.ts
+
+# JUnit test reports
+junit-reports/
+
+# SQLite database
+sqlite.db
