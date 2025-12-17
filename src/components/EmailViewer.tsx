@@ -82,6 +82,18 @@ const EmailViewer: React.FC<EmailViewerProps> = ({
               To: {email.to}
             </Typography>
 
+            {email.cc && (
+              <Typography variant="body2" color="text.secondary">
+                Cc: {email.cc}
+              </Typography>
+            )}
+
+            {email.bcc && (
+              <Typography variant="body2" color="text.secondary">
+                Bcc: {email.bcc}
+              </Typography>
+            )}
+
             <Typography variant="caption" color="text.secondary" sx={{ display: 'block', mt: 1 }}>
               {formatFullDate(email.createdAt)}
             </Typography>

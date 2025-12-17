@@ -50,18 +50,15 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     if (!subject?.trim()) return errorResponse('Subject is required');
     if (!to?.trim()) return errorResponse('Recipient (to) is required');
 
-    // Build recipient string with optional cc/bcc
-    const recipients = [to.trim(), cc?.trim() && `cc: ${cc.trim()}`, bcc?.trim() && `bcc: ${bcc.trim()}`]
-      .filter(Boolean)
-      .join(', ');
-
     const [email] = await db
       .insert(emails)
       .values({
         threadId: threadId || generateThreadId(),
         subject: subject.trim(),
         from: 'me@company.com',
-        to: recipients,
+        to: to.trim(),
+        cc: cc?.trim() || null,
+        bcc: bcc?.trim() || null,
         content: content?.trim() || '',
         isRead: true,
         isImportant: false,

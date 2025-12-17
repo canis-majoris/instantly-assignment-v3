@@ -106,10 +106,20 @@ const EmailMessage: React.FC<EmailMessageProps> = ({
       </AccordionSummary>
       <AccordionDetails>
         <Box sx={{ pl: 6 }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2, flexWrap: 'wrap' }}>
             <Typography variant="body2" color="text.secondary">
               To: {email.to}
             </Typography>
+            {email.cc && (
+              <Typography variant="body2" color="text.secondary">
+                | Cc: {email.cc}
+              </Typography>
+            )}
+            {email.bcc && (
+              <Typography variant="body2" color="text.secondary">
+                | Bcc: {email.bcc}
+              </Typography>
+            )}
             <Box sx={{ flex: 1 }} />
             <Tooltip title={email.isImportant ? 'Remove from important' : 'Mark as important'}>
               <IconButton

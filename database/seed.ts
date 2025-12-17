@@ -11,6 +11,8 @@ export const emailData: Email[] = [
     subject: 'New Project Proposal',
     from: 'sarah.johnson@company.com',
     to: 'team@company.com',
+    cc: null,
+    bcc: null,
     content:
       "Hi team, I'd like to propose a new project for Q1. Let me know your thoughts on the attached proposal.",
     isRead: false,
@@ -26,6 +28,8 @@ export const emailData: Email[] = [
     subject: 'Re: New Project Proposal',
     from: 'mike.chen@company.com',
     to: 'team@company.com',
+    cc: null,
+    bcc: null,
     content:
       'Great idea Sarah! I think this aligns well with our current goals. I have some suggestions for the timeline.',
     isRead: true,
@@ -41,6 +45,8 @@ export const emailData: Email[] = [
     subject: 'Re: New Project Proposal',
     from: 'lisa.wang@company.com',
     to: 'team@company.com',
+    cc: null,
+    bcc: null,
     content:
       'I agree with Mike. The proposal looks solid. When can we schedule a meeting to discuss the details?',
     isRead: true,
@@ -56,6 +62,8 @@ export const emailData: Email[] = [
     subject: 'Re: New Project Proposal',
     from: 'sarah.johnson@company.com',
     to: 'team@company.com',
+    cc: null,
+    bcc: null,
     content:
       "Thanks for the feedback! How about we meet this Friday at 2 PM? I'll send out a calendar invite.",
     isRead: false,
@@ -71,6 +79,8 @@ export const emailData: Email[] = [
     subject: 'Re: New Project Proposal',
     from: 'david.kim@company.com',
     to: 'team@company.com',
+    cc: null,
+    bcc: null,
     content: 'Friday works for me. Looking forward to the discussion!',
     isRead: true,
     isImportant: false,
@@ -87,6 +97,8 @@ export const emailData: Email[] = [
     subject: 'Website Redesign Update',
     from: 'client@acmecorp.com',
     to: 'design@company.com',
+    cc: null,
+    bcc: null,
     content:
       "Hi team, we're really excited about the new design direction. When can we see the next iteration?",
     isRead: false,
@@ -102,6 +114,8 @@ export const emailData: Email[] = [
     subject: 'Re: Website Redesign Update',
     from: 'design@company.com',
     to: 'client@acmecorp.com',
+    cc: null,
+    bcc: null,
     content:
       "Thanks for the feedback! We're working on the next version and should have something to show you by next Tuesday.",
     isRead: true,
@@ -117,6 +131,8 @@ export const emailData: Email[] = [
     subject: 'Re: Website Redesign Update',
     from: 'client@acmecorp.com',
     to: 'design@company.com',
+    cc: null,
+    bcc: null,
     content:
       'Perfect! Looking forward to seeing the progress. The color scheme you chose is exactly what we had in mind.',
     isRead: false,
@@ -132,6 +148,8 @@ export const emailData: Email[] = [
     subject: 'Re: Website Redesign Update',
     from: 'design@company.com',
     to: 'client@acmecorp.com',
+    cc: null,
+    bcc: null,
     content:
       "Great to hear! We'll make sure to include the updated navigation structure in the next version.",
     isRead: true,
@@ -149,6 +167,8 @@ export const emailData: Email[] = [
     subject: 'Database Performance Issue',
     from: 'devops@company.com',
     to: 'engineering@company.com',
+    cc: null,
+    bcc: null,
     content:
       "We're experiencing slow query performance on the user table. Anyone available to help investigate?",
     isRead: false,
@@ -164,6 +184,8 @@ export const emailData: Email[] = [
     subject: 'Re: Database Performance Issue',
     from: 'alex.rodriguez@company.com',
     to: 'engineering@company.com',
+    cc: null,
+    bcc: null,
     content:
       'I can help with this. I suspect it might be related to the new indexing strategy. Let me check the query logs.',
     isRead: true,
@@ -179,6 +201,8 @@ export const emailData: Email[] = [
     subject: 'Re: Database Performance Issue',
     from: 'devops@company.com',
     to: 'engineering@company.com',
+    cc: null,
+    bcc: null,
     content:
       "Thanks Alex! I've sent you the access credentials. The issue seems to be most prominent during peak hours.",
     isRead: true,
@@ -194,6 +218,8 @@ export const emailData: Email[] = [
     subject: 'Re: Database Performance Issue',
     from: 'alex.rodriguez@company.com',
     to: 'engineering@company.com',
+    cc: null,
+    bcc: null,
     content:
       "Found the issue! There's a missing index on the created_at column. I'll implement the fix tonight.",
     isRead: false,
@@ -211,6 +237,8 @@ export const emailData: Email[] = [
     subject: 'Q1 Marketing Campaign Ideas',
     from: 'marketing@company.com',
     to: 'team@company.com',
+    cc: null,
+    bcc: null,
     content:
       "Let's brainstorm some ideas for our Q1 campaign. I'm thinking we focus on sustainability and innovation.",
     isRead: false,
@@ -226,6 +254,8 @@ export const emailData: Email[] = [
     subject: 'Re: Q1 Marketing Campaign Ideas',
     from: 'creative@company.com',
     to: 'team@company.com',
+    cc: null,
+    bcc: null,
     content:
       'Love the sustainability angle! We could create some compelling visuals around our eco-friendly initiatives.',
     isRead: true,
@@ -241,6 +271,8 @@ export const emailData: Email[] = [
     subject: 'Re: Q1 Marketing Campaign Ideas',
     from: 'marketing@company.com',
     to: 'team@company.com',
+    cc: null,
+    bcc: null,
     content:
       "Excellent! Let's schedule a creative session next week to develop the concepts further.",
     isRead: false,
@@ -258,6 +290,8 @@ export const emailData: Email[] = [
     subject: 'Coffee Chat?',
     from: 'colleague@company.com',
     to: 'user@example.com',
+    cc: null,
+    bcc: null,
     content:
       "Hey! Would you like to grab coffee sometime this week? I'd love to catch up and discuss the new project.",
     isRead: false,
@@ -273,6 +307,8 @@ export const emailData: Email[] = [
     subject: 'Re: Coffee Chat?',
     from: 'user@example.com',
     to: 'colleague@company.com',
+    cc: null,
+    bcc: null,
     content: "Absolutely! How about Wednesday afternoon? I'm free after 2 PM.",
     isRead: true,
     isImportant: false,
@@ -287,6 +323,8 @@ export const emailData: Email[] = [
     subject: 'Re: Coffee Chat?',
     from: 'colleague@company.com',
     to: 'user@example.com',
+    cc: null,
+    bcc: null,
     content: "Wednesday works perfectly! Let's meet at the coffee shop on 3rd street at 2:30 PM.",
     isRead: false,
     isImportant: false,
@@ -301,6 +339,8 @@ export const emailData: Email[] = [
     subject: 'Re: Coffee Chat?',
     from: 'user@example.com',
     to: 'colleague@company.com',
+    cc: null,
+    bcc: null,
     content: 'Perfect! See you there. Looking forward to it!',
     isRead: true,
     isImportant: false,

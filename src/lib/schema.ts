@@ -11,6 +11,8 @@ export const emails = sqliteTable('emails', {
   subject: text('subject').notNull(),
   from: text('from').notNull(),
   to: text('to').notNull(),
+  cc: text('cc'),
+  bcc: text('bcc'),
   content: text('content'),
   isRead: integer('is_read', { mode: 'boolean' }).default(false).notNull(),
   isImportant: integer('is_important', { mode: 'boolean' }).default(false).notNull(),

@@ -126,9 +126,9 @@ describe('emails API', () => {
       const body = await response.json();
       createdEmailIds.push(body.email.id);
 
-      expect(body.email.to).toContain('main@test.com');
-      expect(body.email.to).toContain('cc:');
-      expect(body.email.to).toContain('bcc:');
+      expect(body.email.to).toBe('main@test.com');
+      expect(body.email.cc).toBe('cc@test.com');
+      expect(body.email.bcc).toBe('bcc@test.com');
     });
 
     it('Creates email in existing thread when threadId provided', async () => {
@@ -194,6 +194,51 @@ describe('emails API', () => {
         const matchesFrom = email.from.toLowerCase().includes(searchTerm.toLowerCase());
         expect(matchesSubject || matchesContent || matchesFrom).toBe(true);
       });
+    });
+
+    it('Returns emails that match search term in cc or bcc fields', async () => {
+      // First create an email with specific cc/bcc values
+      const emailData = {
+        subject: 'Email with CC/BCC search test',
+        to: 'main@test.com',
+        cc: 'uniqueccvalue@example.com',
+        bcc: 'uniquebccvalue@example.com',
+        content: 'Test content for cc/bcc search',
+      };
+
+      const postRequest = new NextRequest('http://localhost:3000/api/emails', {
+        method: 'POST',
+        body: JSON.stringify(emailData),
+      });
+
+      const postResponse = await POST(postRequest);
+      expect(postResponse.status).toBe(201);
+      const createdEmail = (await postResponse.json()).email;
+      createdEmailIds.push(createdEmail.id);
+
+      // Verify the email was created with cc/bcc
+      expect(createdEmail.cc).toBe('uniqueccvalue@example.com');
+      expect(createdEmail.bcc).toBe('uniquebccvalue@example.com');
+
+      // Search by cc - filter=sent since it's an outgoing email
+      const ccSearchRequest = new NextRequest('http://localhost:3000/api/emails?query=uniqueccvalue&filter=sent', {
+        method: 'GET',
+      });
+
+      const ccSearchResponse = await GET(ccSearchRequest);
+      expect(ccSearchResponse.status).toBe(200);
+      const ccResults = (await ccSearchResponse.json()).emails as Email[];
+      expect(ccResults.some(e => e.id === createdEmail.id)).toBe(true);
+
+      // Search by bcc - filter=sent since it's an outgoing email
+      const bccSearchRequest = new NextRequest('http://localhost:3000/api/emails?query=uniquebccvalue&filter=sent', {
+        method: 'GET',
+      });
+
+      const bccSearchResponse = await GET(bccSearchRequest);
+      expect(bccSearchResponse.status).toBe(200);
+      const bccResults = (await bccSearchResponse.json()).emails as Email[];
+      expect(bccResults.some(e => e.id === createdEmail.id)).toBe(true);
     });
 
     it('Returns threaded emails when threaded=true', async () => {

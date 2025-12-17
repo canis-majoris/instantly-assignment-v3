@@ -43,6 +43,8 @@ function getSearchConditions(query: string) {
   return or(
     like(emails.subject, searchTerm),
     like(emails.to, searchTerm),
+    like(emails.cc, searchTerm),
+    like(emails.bcc, searchTerm),
     like(emails.from, searchTerm),
     like(emails.content, searchTerm),
   );
