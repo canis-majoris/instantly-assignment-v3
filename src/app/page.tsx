@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import ClientPage from '@/app/client-page';
 import { fetchEmails } from '@/lib/emailQueries';
-import { getStats } from '@/lib/statsQueries';
+import { fetchStats } from '@/lib/statsQueries';
 import { EmailFilter } from '@/types';
 import { Box, CircularProgress } from '@mui/material';
 
@@ -37,7 +37,7 @@ export default async function Home({ searchParams }: PageProps) {
   });
 
   // Fetch stats for sidebar counters
-  const stats = await getStats();
+  const stats = await fetchStats();
 
   return (
     <Suspense fallback={<LoadingFallback />}>
