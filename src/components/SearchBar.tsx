@@ -15,7 +15,7 @@ interface SearchBarProps {
   onChange: (value: string) => void;
   placeholder?: string;
   disabled?: boolean;
-  /** Debounce delay in ms before syncing to parent (default: 300) */
+  /** Debounce delay in ms before syncing to parent (default: 500) */
   debounceMs?: number;
 }
 
@@ -24,7 +24,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   onChange,
   placeholder = 'Search emails...',
   disabled = false,
-  debounceMs = 300,
+  debounceMs = 500,
 }) => {
   const [localValue, setLocalValue, flush] = useDebouncedState(value, onChange, debounceMs);
 
