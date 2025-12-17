@@ -11,7 +11,8 @@
     "test:win": "if exist sqlite.test.db del sqlite.test.db && set NODE_ENV=test&& npm run db:init && jest --passWithNoTests",
     "db:push": "drizzle-kit push",
     "db:seed": "tsx database/seed.ts",
-    "db:init": "npm run db:push && npm run db:seed"
+    "db:init": "npm run db:push && npm run db:seed",
+    "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",

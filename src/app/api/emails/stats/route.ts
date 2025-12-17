@@ -4,7 +4,7 @@
  */
 
 import { NextResponse } from 'next/server';
-import { statsService } from '@/lib/statsService';
+import { getStats } from '@/lib/statsQueries';
 import { EmailStats, ApiResponse } from '@/types';
 
 /**
@@ -13,7 +13,7 @@ import { EmailStats, ApiResponse } from '@/types';
  */
 export async function GET(): Promise<NextResponse<ApiResponse<EmailStats>>> {
   try {
-    const stats = await statsService.getStats();
+    const stats = await getStats();
 
     return NextResponse.json({
       status: 'success',

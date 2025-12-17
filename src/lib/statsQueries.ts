@@ -1,5 +1,5 @@
 /**
- * Stats Service - Manages the email stats lookup table
+ * Stats Queries - Manages the email stats lookup table
  * Provides functions to recalculate and update denormalized stats
  */
 
@@ -123,11 +123,3 @@ export async function getStats(): Promise<EmailStats> {
 export async function invalidateStats(): Promise<void> {
   await recalculateStats();
 }
-
-export const statsService = {
-  getStats,
-  recalculateStats,
-  invalidateStats,
-};
-
-export default statsService;

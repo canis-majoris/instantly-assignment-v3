@@ -1,6 +1,6 @@
 /**
- * Email Query Builder
- * Shared logic for building email queries with filtering, search, and threading
+ * Email Queries
+ * Data access layer for email queries with filtering, search, and threading
  * Used by both server components and API routes
  */
 

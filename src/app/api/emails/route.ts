@@ -6,7 +6,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/database';
 import { emails, EmailDirection } from '@/lib/schema';
-import { statsService } from '@/lib/statsService';
+import { invalidateStats, recalculateStats } from '@/lib/statsQueries';
 import { fetchEmails } from '@/lib/emailQueries';
 import { generateThreadId } from '@/lib/utils';
 import { eq, and } from 'drizzle-orm';
@@ -71,7 +71,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       })
       .returning();
 
-    await statsService.invalidateStats();
+    await invalidateStats();
     return successResponse({ email }, 201);
   } catch (error) {
     console.error('POST /api/emails error:', error);
@@ -101,7 +101,7 @@ export async function PATCH(request: NextRequest): Promise<NextResponse> {
 
     if (!updatedEmails.length) return errorResponse('Email(s) not found', 404);
 
-    const stats = await statsService.recalculateStats();
+    const stats = await recalculateStats();
     return successResponse({ email: updatedEmails[0], emails: updatedEmails, stats });
   } catch (error) {
     console.error('PATCH /api/emails error:', error);
@@ -141,7 +141,7 @@ export async function DELETE(request: NextRequest): Promise<NextResponse> {
 
     if (!deleted.length) return errorResponse('Email(s) not found', 404);
 
-    const stats = await statsService.recalculateStats();
+    const stats = await recalculateStats();
     return successResponse({ message: threadId ? 'Thread moved to trash' : 'Email moved to trash', stats });
   } catch (error) {
     console.error('DELETE /api/emails error:', error);

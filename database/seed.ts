@@ -1,6 +1,6 @@
 import { db } from '@/lib/database';
 import { Email, EmailDirection, emails } from '@/lib/schema';
-import { statsService } from '@/lib/statsService';
+import { recalculateStats } from '@/lib/statsQueries';
 
 // Create sample emails organized into threads
 export const emailData: Email[] = [
@@ -339,7 +339,7 @@ async function main() {
   console.log(`✅ Created ${insertedEmails.length} emails`);
 
   // Initialize stats lookup table
-  await statsService.recalculateStats();
+  await recalculateStats();
   console.log('✅ Initialized stats lookup table');
 
   console.log('🎉 Database seeding completed successfully!');
